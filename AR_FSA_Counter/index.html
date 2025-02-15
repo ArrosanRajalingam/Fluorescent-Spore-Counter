@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AR FSA Multi Counter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .counter-container {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            justify-content: center;
+            margin-top: 20px;
+            gap: 1px;
+            align-items: stretch;
+        }
+        .counter {
+            border: 2px solid #000;
+            padding: 10px;
+            width: 180px;
+            height: 200px;
+            text-align: center;
+            font-size: 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background-color: #ffffff;
+            position: relative;
+        }
+        .counter h3 {
+            margin-top: 0;
+            margin-bottom: 5px;
+            font-size: 14px;
+            background-color: #f0f0f0;
+            padding: 5px;
+            border-bottom: 1px solid #000;
+            width: 100%;
+            text-align: center;
+        }
+        .counter p {
+            font-size: 08px;
+            margin: 5px 0;
+            flex-grow: 1;
+        }
+        .counter .counter-buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+        .counter button {
+            padding: 5px;
+            font-size: 14px;
+            width: 30px;
+            height: 30px;
+            text-align: center;
+        }
+        .counter img {
+            width: 100px;
+            height: 100px;
+            display: block;
+            margin: auto;
+        }
+        .total {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        h1 {
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>AR FSA Multi Counter</h1>
+    <div class="counter-container" id="counterContainer"></div>
+    <div class="total">Total: <span id="totalCount">0</span></div>
+
+    <script>
+        const categories = [
+            { name: "Parental Ditype (P)", img: "Yellow_RG_Yellow_Blue_Blue.png", desc: "Yellow (RED &Green), Yellow, Blue, Blue" },
+            { name: "Crossover (CO) - RG", img: "Yellow_RG_Megenta_Green_Blue.png", desc: "Yellow (RG), Megenta (RB), Green, Blue" },
+            { name: "Crossover (CO) - GB", img: "White_RGB_Yellow_Blue_Empty.png", desc: "White (RGB), Yellow (RG), Blue, Empty" },
+            { name: "Double Crossover A", img: "White_RGB_Red_Green_Blue.png", desc: "Yellow (RG), Megenta (RB), Cyan (Green & Blue), Empty" },
+            { name: "Double Crossover B", img: "Yellow_RG_Megenta_Cyan_Empty.png", desc: "White (RGB), Megenta (RB), Green, Empty" },
+            { name: "Double Crossover C", img: "yellow_RG_Red_Cyan_Blue.png", desc: "White (RGB), Red, Green, Blue" },
+            { name: "Double Crossover D", img: "Red_Megenta_Green_Cyan.png", desc: "yellow (RG), Red, Cyan (GB), Blue" },
+            { name: "Non-Parental Ditype (NPD) - RG", img: "White_RGB_White_Empty.png", desc: "Megenta (RB), Megenta (RB), Green, Green" },
+            { name: "Non-Parental Ditype (NPD) - GB/MINDJ", img: "Red_Cyan_White_Empty.png", desc: "White (RGB), White (RGB), Empty, Empty" },
+            { name: "Other Crossover 1", img: "Other_Crossover_1.png", desc: "Red, Megenta (RB), Green, Cyan (Green & Blue)" },
+            { name: "Other Crossover 2", img: "Other_Crossover_2.png", desc: "Description for Other Crossover 2" }
+        ];
+
+        let totalCount = 0;
+        const totalCountElement = document.getElementById("totalCount");
+        const counterContainer = document.getElementById("counterContainer");
+
+        function updateTotal(value) {
+            totalCount += value;
+            totalCountElement.textContent = totalCount;
+        }
+
+        categories.forEach(category => {
+            const counterDiv = document.createElement("div");
+            counterDiv.className = "counter";
+            counterDiv.innerHTML = `
+                <h3>${category.name}</h3>
+                <img src="${category.img}" alt="${category.name}">
+                <p>${category.desc}</p>
+                <div class="counter-buttons">
+                    <button onclick="decrement('${category.name}')">-</button>
+                    <span id="count-${category.name}">0</span>
+                    <button onclick="increment('${category.name}')">+</button>
+                </div>
+            `;
+            counterContainer.appendChild(counterDiv);
+        });
+
+        function increment(category) {
+            const countSpan = document.getElementById(`count-${category}`);
+            countSpan.textContent = parseInt(countSpan.textContent) + 1;
+            updateTotal(1);
+        }
+
+        function decrement(category) {
+            const countSpan = document.getElementById(`count-${category}`);
+            let currentValue = parseInt(countSpan.textContent);
+            if (currentValue > 0) {
+                countSpan.textContent = currentValue - 1;
+                updateTotal(-1);
+            }
+        }
+    </script>
+<footer style="margin-top: 10px; width: 100%; font-size: 14px; font-weight: bold; text-align: center; background-color: #ffffff;">&copy; Arrosan Rajalingam, Hajime Murakami Lab, 2025.</footer>
+</body>
+</html>
