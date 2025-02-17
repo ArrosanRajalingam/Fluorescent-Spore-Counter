@@ -84,7 +84,10 @@
 <body>
     <h1>Fluorescent Spore Counter</h1>
     <div class="counter-container" id="counterContainer"></div>
-    <div class="total">Total: <span id="totalCount">0</span></div>
+    <div class="total">
+        Total: <span id="totalCount">0</span>
+        <button class="summary-button" onclick="showSummary()">Show Summary</button>
+    </div>
 
     <script>
         const categories = [
