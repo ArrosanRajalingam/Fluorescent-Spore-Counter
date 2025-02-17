@@ -69,6 +69,12 @@
             font-size: 18px;
             font-weight: bold;
         }
+         .summary-button {
+            margin-left: 10px;
+            padding: 8px 12px;
+            font-size: 14px;
+            cursor: pointer;
+        }
         h1 {
             font-size: 20px;
             font-weight: bold;
@@ -133,6 +139,16 @@
                 countSpan.textContent = currentValue - 1;
                 updateTotal(-1);
             }
+        }
+        function showSummary() {
+            let tableHTML = '<html><head><title>Summary</title></head><body><h1>Fluorescent Spore Counter Summary</h1><table border="1"><tr><th>Category</th><th>Count</th></tr>';
+            categories.forEach(category => {
+                const count = document.getElementById(`count-${category.name}`).textContent;
+                tableHTML += `<tr><td>${category.name}</td><td>${count}</td></tr>`;
+            });
+            tableHTML += `<tr><td><b>Total</b></td><td><b>${totalCount}</b></td></tr></table></body></html>`;
+            const summaryWindow = window.open('', '_blank');
+            summaryWindow.document.write(tableHTML);
         }
     </script>
 <footer style="margin-top: 10px; width: 100%; font-size: 14px; font-weight: bold; text-align: center; background-color: #ffffff;">&copy; Arrosan Rajalingam, Hajime Murakami Lab, 2025.</footer>
