@@ -204,18 +204,18 @@
     let counts = {};
 
     const categories = [
-    { name: "Parental Ditype (P)", img: "Images/Yellow(RED&Green)_Yellow_Blue_Blue.png", desc: "Yellow (RED &Green), Yellow, Blue, Blue" },
-            { name: "Crossover (CO) - RG", img: "Images/Yellow(RG)_Megenta(RB)_Green_Blue.png", desc: "Yellow (RG), Megenta (RB), Green, Blue" },
-            { name: "Crossover (CO) - GB", img: "Images/White(RGB)_Yellow(RG)_Blue_Empty.png", desc: "White (RGB), Yellow (RG), Blue, Empty" },
-            { name: "Double Crossover A", img: "Images/Yellow(RG)_Megenta(RB)_Cyan(Green&Blue)_Empty.png", desc: "Yellow (RG), Megenta (RB), Cyan (Green & Blue), Empty" },
-            { name: "Double Crossover B", img: "Images/White(RGB)_Megenta(RB)_Green_Empty.png", desc: "White (RGB), Megenta (RB), Green, Empty" },
-            { name: "Double Crossover C", img: "Images/White(RGB)_Red_Green_Blue.png", desc: "White (RGB), Red, Green, Blue" },
-            { name: "Double Crossover D", img: "Images/yellow(RG)_Red_Cyan(GB)_Blue.png", desc: "yellow (RG), Red, Cyan (GB), Blue" },
-            { name: "Non-Parental Ditype (NPD) - RG", img: "Images/Megenta(RB)_Megenta(RB)_Green_Green.png", desc: "Megenta (RB), Megenta (RB), Green, Green" },
-            { name: "Non-Parental Ditype (NPD) - GB/MINDJ", img: "Images/White(RGB)_White(RGB)_Empty_Empty.png", desc: "White (RGB), White (RGB), Empty, Empty" },
-            { name: "Other Crossover 1", img: "Images/Extra1.png", desc: "Red, Megenta (RB), Green, Cyan (Green & Blue)" },
-            { name: "Other Crossover 2", img: "Images/Extra2.png", desc: "Description for Other Crossover 2" },
-        { name: "Other Observations", type: "otherObservations", subcategories: [
+        { name: "Parental Ditype (P)", img: "Images/Yellow(RED&Green)_Yellow_Blue_Blue.png", desc: "Yellow (RED &Green), Yellow, Blue, Blue", type: "recombination" },
+        { name: "Crossover (CO) - RG", img: "Images/Yellow(RG)_Megenta(RB)_Green_Blue.png", desc: "Yellow (RG), Megenta (RB), Green, Blue", type: "recombination" },
+        { name: "Crossover (CO) - GB", img: "Images/White(RGB)_Yellow(RG)_Blue_Empty.png", desc: "White (RGB), Yellow (RG), Blue, Empty", type: "recombination" },
+        { name: "Double Crossover A", img: "Images/Yellow(RG)_Megenta(RB)_Cyan(Green&Blue)_Empty.png", desc: "Yellow (RG), Megenta (RB), Cyan (Green & Blue), Empty", type: "recombination" },
+        { name: "Double Crossover B", img: "Images/White(RGB)_Megenta(RB)_Green_Empty.png", desc: "White (RGB), Megenta (RB), Green, Empty", type: "recombination" },
+        { name: "Double Crossover C", img: "Images/White(RGB)_Red_Green_Blue.png", desc: "White (RGB), Red, Green, Blue", type: "recombination" },
+        { name: "Double Crossover D", img: "Images/yellow(RG)_Red_Cyan(GB)_Blue.png", desc: "yellow (RG), Red, Cyan (GB), Blue", type: "recombination" },
+        { name: "Non-Parental Ditype (NPD) - RG", img: "Images/Megenta(RB)_Megenta(RB)_Green_Green.png", desc: "Megenta (RB), Megenta (RB), Green, Green", type: "recombination" },
+        { name: "Non-Parental Ditype (NPD) - GB/MINDJ", img: "Images/White(RGB)_White(RGB)_Empty_Empty.png", desc: "White (RGB), White (RGB), Empty, Empty", type: "recombination" },
+        { name: "Other Crossover 1", img: "Images/Extra1.png", desc: "Red, Megenta (RB), Green, Cyan (Green & Blue)", type: "otherRecombination" },
+        { name: "Other Crossover 2", img: "Images/Other2.png", desc: "Red, Cyan(GB), White(RGB), Empty ", type: "otherRecombination" },
+        { name: "Other Observations", type: "Images/Extra2.png", subcategories: [
             "Tetrads 2:2 Segregation",
             "Tetrads No 2:2 Segregation",
             "Cells without tetrads"
@@ -359,6 +359,5 @@
         updateSummaryTable();
     });
 </script>
-<footer style="margin-top: 10px; width: 100%; font-size: 14px; font-weight: bold; text-align: center; background-color: #ffffff;">&copy; Arrosan Rajalingam, Hajime Murakami Lab, 2025.</footer>
 </body>
 </html>
