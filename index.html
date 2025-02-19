@@ -8,90 +8,203 @@
         body {
             font-family: Arial, sans-serif;
             text-align: center;
+            margin: 0;
+            padding: 5px;
+            font-size: 11px;
         }
-        .counter-container {
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            justify-content: center;
-            margin-top: 20px;
-            gap: 1px;
-            align-items: stretch;
+        h1 {
+            font-size: 18px;
+            margin-bottom: 8px;
         }
+      .counter-container {
+    		display: grid;
+   		grid-template-columns: repeat(6, 16%); /* 6 equally-sized columns */
+   		grid-auto-rows: 0.8fr;                   /* Each row has a flexible height */
+   		row-gap: 15px;
+    		column-gap: 2px;
+    		width: 99vw;
+    		margin: auto;
+    		padding: 4px;
+
+    		/* Key property to stretch counters to fill row height */
+   		align-items: stretch;
+	}
+
         .counter {
-            border: 2px solid #000;
-            padding: 10px;
-            width: 180px;
-            height: 200px;
+            border: 1px solid #000;
+            padding: 6px;
             text-align: center;
-            font-size: 12px;
+            font-size: 11px;
+            background-color: #ffffff;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            background-color: #ffffff;
-            position: relative;
+            border-radius: 4px;
+	    align-items: center;
+            box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+            height: 100%; /* Let counter fill grid cell height */
+            min-height: 300px; /* Added min-height to make all counters at least this tall */
         }
         .counter h3 {
-            margin-top: 0;
-            margin-bottom: 5px;
-            font-size: 14px;
+            font-size: 12px;
             background-color: #f0f0f0;
-            padding: 5px;
-            border-bottom: 1px solid #000;
+            padding: 4px;
             width: 100%;
             text-align: center;
+            border-bottom: 1px solid black;
+            border-radius: 3px;
+	    margin-top: 0;
+            margin-bottom: 4px;
         }
-        .counter p {
-            font-size: 08px;
-            margin: 5px 0;
-            flex-grow: 1;
+        .counter p, .counter img {
+            margin-bottom: 3px;
+            max-width: 95%;
+            height: auto;
         }
-        .counter .counter-buttons {
+        .counter img {
+            max-height: 50px;
+        }
+	.counter hr {
+   	    margin-top: 0px;    /* Reduce top margin - adjust value */
+    	    margin-bottom: 0px; /* Reduce bottom margin - adjust value */
+	}
+        .counter-buttons {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 10px;
+            gap: 3px;
+            margin-top: 3px;
         }
-        .counter button {
-            padding: 5px;
-            font-size: 14px;
-            width: 30px;
-            height: 30px;
+        .counter-buttons button {
+            width: 25px;
+            height: 25px;
+            font-size: 12px;
+            font-weight: bold;
+            border-radius: 3px;
+            border: 1px solid black;
+            cursor: pointer;
+            background-color: #f0f0f0;
+        }
+        .counter-buttons span {
+            font-size: 12px;
+            font-weight: bold;
+            min-width: 25px;
+            display: inline-block;
             text-align: center;
         }
-        .counter img {
-            width: 100px;
-            height: 100px;
-            display: block;
-            margin: auto;
-        }
         .total {
-            margin-top: 20px;
-            font-size: 18px;
+            margin-top: 10px;
+            font-size: 12px;
             font-weight: bold;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
         }
-         .summary-button {
-            margin-left: 10px;
-            padding: 8px 12px;
+        .grand-total {
             font-size: 14px;
-            cursor: pointer;
-        }
-        h1 {
-            font-size: 20px;
             font-weight: bold;
+            color: black;
+        }
+        .summary-button {
+            margin-top: 8px;
+            padding: 6px 10px;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 3px;
+            border: 1px solid black;
+            background-color: #f0f0f0;
+        }
+
+        /* Style for summary table embedded in the page */
+        #summaryContainer {
+            display: none;
+            width: 60%;
+            margin: 10px auto;
+        }
+        .summary-table {
+            width: 100%;      /* Table takes full width of the container */
+            border-collapse: collapse;
+            margin-top: 5px;
+            font-size: 10px;
+            margin-left: auto;  /* Center the table horizontally */
+            margin-right: auto; /* Center the table horizontally */
+        }
+        .summary-table th, .summary-table td {
+            border: 1px solid black;
+            padding: 4px;
+            text-align: left;
+        }
+        .summary-table th {
+            background-color: #f0f0f0;
+        }
+        .summary-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 3px;
+            text-align: center;
+        }
+        .summary-total-row td {
+            font-weight: bold;
+            font-size: 14px;
+            text-align: left;
         }
     </style>
 </head>
 <body>
     <h1>Fluorescent Spore Counter</h1>
     <div class="counter-container" id="counterContainer"></div>
-    <div class="total">
-        Total: <span id="totalCount">0</span>
-        <button class="summary-button" onclick="showSummary()">Show Summary</button>
-    </div>
 
-    <script>
-        const categories = [
-            { name: "Parental Ditype (P)", img: "Images/Yellow(RED&Green)_Yellow_Blue_Blue.png", desc: "Yellow (RED &Green), Yellow, Blue, Blue" },
+    <div class="total">
+    <p>Total (Recombination Types): <span id="recombinationTotal">0</span></p>
+    <p>Total (Other Recombination Types): <span id="otherRecombinationTotal">0</span></p>
+    <p>Total (Other Observations): <span id="otherObservationsTotal">0</span></p>
+    <p class="grand-total">Grand Total: <span id="grandTotal">0</span></p>
+</div>
+
+<button class="summary-button" onclick="toggleSummary()">Show Summary</button>
+
+<div id="summaryContainer">
+    <h2 class="summary-title">Fluorescent Spore Counter Summary</h2>
+    <table class="summary-table" id="summaryTable">
+        <thead>
+            <tr>
+                <th>Category</th>
+                <th>Count</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>Parental Ditype (P)</td><td id="summary-Parental Ditype (P)">0</td></tr>
+            <tr><td>Crossover (CO) - RG</td><td id="summary-Crossover (CO) - RG">0</td></tr>
+            <tr><td>Crossover (CO) - GB</td><td id="summary-Crossover (CO) - GB">0</td></tr>
+            <tr><td>Double Crossover A</td><td id="summary-Double Crossover A">0</td></tr>
+            <tr><td>Double Crossover B</td><td id="summary-Double Crossover B)">0</td></tr>
+            <tr><td>Double Crossover C</td><td id="summary-Double Crossover C">0</td></tr>
+            <tr><td>Double Crossover D</td><td id="summary-Double Crossover D">0</td></tr>
+            <tr><td>Non-Parental Ditype (NPD) - RG</td><td id="summary-Non-Parental Ditype (NPD) - RG">0</td></tr>
+            <tr><td>Non-Parental Ditype (NPD) - GB/MINDJ</td><td id="summary-Non-Parental Ditype (NPD) - GB/MINDJ">0</td></tr>
+            <tr class="summary-total-row"><td><b>Total (Recombination Types)</b></td><td id="summary-recombinationTotal">0</td></tr>
+            <tr><td>Other Crossover 1</td><td id="summary-Other Crossover 1">0</td></tr>
+            <tr><td>Other Crossover 2</td><td id="summary-Other Crossover 2">0</td></tr>
+            <tr class="summary-total-row"><td><b>Total (Other Recombination Types)</b></td><td id="summary-otherRecombinationTotal">0</td></tr>
+            <tr><td>Tetrads 2:2 Segregation</td><td id="summary-Tetrads 2:2 Segregation">0</td></tr>
+            <tr><td>Tetrads No 2:2 Segregation</td><td id="summary-Tetrads No 2:2 Segregation">0</td></tr>
+            <tr><td>Cells without tetrads</td><td id="summary-Cells without tetrads">0</td></tr>
+            <tr class="summary-total-row"><td><b>Total (Other Observations)</b></td><td id="summary-otherObservationsTotal">0</td></tr>
+            <tr class="summary-total-row"><td><b>Grand Total</b></td><td id="summary-grandTotal">0</td></tr>
+        </tbody>
+    </table>
+
+    <!-- 3) Added a new button to let users download the summary table as Excel -->
+    <button class="summary-button" onclick="downloadAsExcel()">Download as Excel</button>
+</div>
+</div>
+
+<script>
+    let counts = {};
+
+    const categories = [
+    { name: "Parental Ditype (P)", img: "Images/Yellow(RED&Green)_Yellow_Blue_Blue.png", desc: "Yellow (RED &Green), Yellow, Blue, Blue" },
             { name: "Crossover (CO) - RG", img: "Images/Yellow(RG)_Megenta(RB)_Green_Blue.png", desc: "Yellow (RG), Megenta (RB), Green, Blue" },
             { name: "Crossover (CO) - GB", img: "Images/White(RGB)_Yellow(RG)_Blue_Empty.png", desc: "White (RGB), Yellow (RG), Blue, Empty" },
             { name: "Double Crossover A", img: "Images/Yellow(RG)_Megenta(RB)_Cyan(Green&Blue)_Empty.png", desc: "Yellow (RG), Megenta (RB), Cyan (Green & Blue), Empty" },
@@ -101,59 +214,151 @@
             { name: "Non-Parental Ditype (NPD) - RG", img: "Images/Megenta(RB)_Megenta(RB)_Green_Green.png", desc: "Megenta (RB), Megenta (RB), Green, Green" },
             { name: "Non-Parental Ditype (NPD) - GB/MINDJ", img: "Images/White(RGB)_White(RGB)_Empty_Empty.png", desc: "White (RGB), White (RGB), Empty, Empty" },
             { name: "Other Crossover 1", img: "Images/Extra1.png", desc: "Red, Megenta (RB), Green, Cyan (Green & Blue)" },
-            { name: "Other Crossover 2", img: "Images/Extra2.png", desc: "Description for Other Crossover 2" }
-        ];
+            { name: "Other Crossover 2", img: "Images/Extra2.png", desc: "Description for Other Crossover 2" },
+        { name: "Other Observations", type: "otherObservations", subcategories: [
+            "Tetrads 2:2 Segregation",
+            "Tetrads No 2:2 Segregation",
+            "Cells without tetrads"
+        ]}
+    ];
 
-        let totalCount = 0;
-        const totalCountElement = document.getElementById("totalCount");
-        const counterContainer = document.getElementById("counterContainer");
-
-        function updateTotal(value) {
-            totalCount += value;
-            totalCountElement.textContent = totalCount;
-        }
-
-        categories.forEach(category => {
-            const counterDiv = document.createElement("div");
-            counterDiv.className = "counter";
-            counterDiv.innerHTML = `
+    function createCounter(category) {
+        if (category.subcategories) {
+            const div = document.createElement("div");
+            div.className = "counter";
+            div.style.minHeight = '180px'; /* Ensure min-height is also set here for dynamically created counters */
+            div.innerHTML = `<h3>${category.name}</h3>`;
+            category.subcategories.forEach(sub => {
+                counts[sub] = 0;
+                div.innerHTML += `
+                    <p>${sub}</p>
+                    <div class="counter-buttons">
+                        <button onclick="updateCount('${sub}', -1)">-</button>
+                        <span id="count-${sub}">0</span>
+                        <button onclick="updateCount('${sub}', 1)">+</button>
+                    </div>
+                    <hr>
+                `;
+            });
+            document.getElementById("counterContainer").appendChild(div);
+        } else {
+            counts[category.name] = 0;
+            const div = document.createElement("div");
+            div.className = "counter";
+             div.style.minHeight = '180px'; /* Ensure min-height is also set here for dynamically created counters */
+            div.innerHTML = `
                 <h3>${category.name}</h3>
-                <img src="${category.img}" alt="${category.name}">
-                <p>${category.desc}</p>
+                <img src="${category.img || ''}" alt="${category.name}">
+                <p>${category.desc || ''}</p>
                 <div class="counter-buttons">
-                    <button onclick="decrement('${category.name}')">-</button>
+                    <button onclick="updateCount('${category.name}', -1)">-</button>
                     <span id="count-${category.name}">0</span>
-                    <button onclick="increment('${category.name}')">+</button>
+                    <button onclick="updateCount('${category.name}', 1)">+</button>
                 </div>
             `;
-            counterContainer.appendChild(counterDiv);
+            document.getElementById("counterContainer").appendChild(div);
+        }
+    }
+
+    function updateCount(category, change) {
+        counts[category] += change;
+        if (counts[category] < 0) counts[category] = 0;
+        document.getElementById(`count-${category}`).textContent = counts[category];
+        updateTotals();
+        updateSummaryTable();
+    }
+
+    function updateTotals() {
+        let recombinationTotal = 0;
+        let otherRecombinationTotal = 0;
+        let otherObservationsTotal = 0;
+
+        categories.forEach(category => {
+            if (category.subcategories) {
+                category.subcategories.forEach(sub => {
+                    if (category.type === "otherObservations") {
+                        otherObservationsTotal += counts[sub];
+                    }
+                });
+            } else {
+                if (category.type === "recombination") {
+                    recombinationTotal += counts[category.name];
+                } else if (category.type === "otherRecombination") {
+                    otherRecombinationTotal += counts[category.name];
+                }
+            }
         });
 
-        function increment(category) {
-            const countSpan = document.getElementById(`count-${category}`);
-            countSpan.textContent = parseInt(countSpan.textContent) + 1;
-            updateTotal(1);
-        }
+        document.getElementById("recombinationTotal").textContent = recombinationTotal;
+        document.getElementById("otherRecombinationTotal").textContent = otherRecombinationTotal;
+        document.getElementById("otherObservationsTotal").textContent = otherObservationsTotal;
+        document.getElementById("grandTotal").textContent = recombinationTotal + otherRecombinationTotal + otherObservationsTotal;
+    }
 
-        function decrement(category) {
-            const countSpan = document.getElementById(`count-${category}`);
-            let currentValue = parseInt(countSpan.textContent);
-            if (currentValue > 0) {
-                countSpan.textContent = currentValue - 1;
-                updateTotal(-1);
-            }
+    function updateSummaryTable() {
+        document.getElementById("summary-Parental Ditype (P)").textContent = counts["Parental Ditype (P)"] || 0;
+        document.getElementById("summary-Crossover (CO) - RG").textContent = counts["Crossover (CO) - RG"] || 0;
+        document.getElementById("summary-Crossover (CO) - GB").textContent = counts["Crossover (CO) - GB"] || 0;
+        document.getElementById("summary-Double Crossover A").textContent = counts["Double Crossover A"] || 0;
+        document.getElementById("summary-Double Crossover B)").textContent = counts["Double Crossover B"] || 0;
+        document.getElementById("summary-Double Crossover C").textContent = counts["Double Crossover C"] || 0;
+        document.getElementById("summary-Double Crossover D").textContent = counts["Double Crossover D"] || 0;
+        document.getElementById("summary-Non-Parental Ditype (NPD) - RG").textContent = counts["Non-Parental Ditype (NPD) - RG"] || 0;
+        document.getElementById("summary-Non-Parental Ditype (NPD) - GB/MINDJ").textContent = counts["Non-Parental Ditype (NPD) - GB/MINDJ"] || 0;
+        document.getElementById("summary-Other Crossover 1").textContent = counts["Other Crossover 1"] || 0;
+        document.getElementById("summary-Other Crossover 2").textContent = counts["Other Crossover 2"] || 0;
+        document.getElementById("summary-Tetrads 2:2 Segregation").textContent = counts["Tetrads 2:2 Segregation"] || 0;
+        document.getElementById("summary-Tetrads No 2:2 Segregation").textContent = counts["Tetrads No 2:2 Segregation"] || 0;
+        document.getElementById("summary-Cells without tetrads").textContent = counts["Cells without tetrads"] || 0;
+
+        document.getElementById("summary-recombinationTotal").textContent = document.getElementById("recombinationTotal").textContent;
+        document.getElementById("summary-otherRecombinationTotal").textContent = document.getElementById("otherRecombinationTotal").textContent;
+        document.getElementById("summary-otherObservationsTotal").textContent = document.getElementById("otherObservationsTotal").textContent;
+        document.getElementById("summary-grandTotal").textContent = document.getElementById("grandTotal").textContent;
+    }
+
+    function toggleSummary() {
+        const summaryContainer = document.getElementById("summaryContainer");
+        if (summaryContainer.style.display === 'none') {
+            summaryContainer.style.display = 'block';
+            updateSummaryTable();
+        } else {
+            summaryContainer.style.display = 'none';
         }
-        function showSummary() {
-            let tableHTML = '<html><head><title>Summary</title></head><body><h1>Fluorescent Spore Counter Summary</h1><table border="1"><tr><th>Category</th><th>Count</th></tr>';
-            categories.forEach(category => {
-                const count = document.getElementById(`count-${category.name}`).textContent;
-                tableHTML += `<tr><td>${category.name}</td><td>${count}</td></tr>`;
-            });
-            tableHTML += `<tr><td><b>Total</b></td><td><b>${totalCount}</b></td></tr></table></body></html>`;
-            const summaryWindow = window.open('', '_blank');
-            summaryWindow.document.write(tableHTML);
-        }
-    </script>
+    }
+
+    function downloadAsExcel() {
+        // Grab the HTML from the summary table
+        let tableHTML = document.getElementById("summaryTable").outerHTML;
+
+        // 2. Build the heading you want displayed in Excel
+        let headingHTML = '<h2 style="text-align:center;">Fluorescent Spore Counter Summary</h2>';
+
+        // 3. Combine heading + table into a single HTML string
+        let excelHTML = headingHTML + tableHTML;
+        
+        // Create a Blob with the Excel MIME type
+        let blob = new Blob([excelHTML], { type: 'application/vnd.ms-excel' });
+        
+        // Generate a temporary URL for the Blob
+        let url = URL.createObjectURL(blob);
+        
+        // Create a temporary <a> element to trigger the download
+        let link = document.createElement('a');
+        link.href = url;
+        link.download = 'FluorescentSporeSummary.xls';
+
+        // Programmatically click the link to start download, then revoke object URL
+        link.click();
+        URL.revokeObjectURL(url);
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        categories.forEach(createCounter);
+        updateTotals();
+        updateSummaryTable();
+    });
+</script>
 <footer style="margin-top: 10px; width: 100%; font-size: 14px; font-weight: bold; text-align: center; background-color: #ffffff;">&copy; Arrosan Rajalingam, Hajime Murakami Lab, 2025.</footer>
 </body>
 </html>
