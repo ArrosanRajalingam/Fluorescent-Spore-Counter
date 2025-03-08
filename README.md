@@ -17,7 +17,7 @@ FSA utilizes three fluorescent markers:
 
 Based on the segregation patterns of these markers, different recombination events (single and double crossovers, non-parental ditypes, and meiosis I nondisjunction events) can be identified and categorized. Genetic distances are calculated using **Perkins' equation**:
 
-\(cM = \frac{100 \times (6 \times NPD + TT)}{2 \times (PD + NPD + TT)}\)
+$$cM = \frac{100 \times (6 \times NPD + TT)}{2 \times (PD + NPD + TT)}$$
 
 ## 📊 Tetrad Analysis Table
 | **Tetrad Type** | **Marker Configuration** |
