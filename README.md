@@ -4,10 +4,10 @@
 The **Fluorescent Spore Counter (FSA)** is a tool designed to analyze tetrad dissection outcomes using fluorescent markers in budding yeast. It facilitates efficient scoring of different recombination events based on color markers, allowing researchers to determine crossover frequencies and genetic distances.
 
 ## 🌐 Web Application
-### **🔗 [Click here to use the Fluorescent Spore Counter](https://arrosancodelab.github.io/Fluorescent-Spore-Counter/)**
+### **🔗 [Click here to use the Fluorescent Spore Counter](https://ArrosanRajalingam.github.io/Fluorescent-Spore-Counter/)**
 
 ## 📂 Repository Link
-This repository hosts the code and documentation for the FSA tool: [GitHub Repository](https://github.com/ArrosanCodeLab/Fluorescent-Spore-Counter).
+This repository hosts the code and documentation for the FSA tool: [GitHub Repository](https://github.com/ArrosanRajalingam/Fluorescent-Spore-Counter).
 
 ## 🧬 How It Works
 FSA utilizes three fluorescent markers:
@@ -45,7 +45,7 @@ This image represents the starting parental configuration, genetic intervals, an
    git clone https://github.com/ArrosanCodeLab/Fluorescent-Spore-Counter.git
    ```
 2. Open the `index.html` file in a browser to use the counter offline.
-3. Visit the [web-based counter](https://arrosancodelab.github.io/Fluorescent-Spore-Counter/) for easy tetrad scoring.
+3. Visit the [web-based counter](https://ArrosanRajalingam.github.io/Fluorescent-Spore-Counter/) for easy tetrad scoring.
 
 ## 🤝 Contributions
 If you would like to contribute, submit an issue or a pull request. Suggestions and improvements are welcome!
